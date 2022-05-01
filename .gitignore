@@ -1,0 +1,9 @@
+/.idea/
+.idea/
+node_modules/
+.parcel-cache/
+dist/
+coverage/
+.env
+mockexam.iml
+*.iml
