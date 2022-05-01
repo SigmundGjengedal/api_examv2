@@ -1,5 +1,5 @@
 # Exam 2022 api and react
 
-https://mockexamsig.herokuapp.com/
+https://examsagv2.herokuapp.com/
 * [x] MVP with heroku running
-* [] Routes in index.jsx
+* [x] Routes in index.jsx
