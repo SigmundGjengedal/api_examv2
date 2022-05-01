@@ -11,6 +11,9 @@ function FrontPage() {
     return (
         <div>
             <h1>Front Page</h1>
+            <div>
+                <Link to={"/movies"}>List movies</Link>
+            </div>
 
             <div>
                 <Link to="/login">Login with Google</Link>
