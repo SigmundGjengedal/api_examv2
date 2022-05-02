@@ -11,11 +11,16 @@ async function fetchJSON(url, options) {
 
 export function LoginApi(){
     const router = new express.Router();
+
+    // variables som gjenbrukes
+    const discoveryEndpoint = "https://accounts.google.com/.well-known/openid-configuration";
+
+    // henter userinnfo fra discovery endpointet
     router.get("/", async (req, res) => {
         const { access_token } = req.signedCookies;
 
         const { userinfo_endpoint } = await fetchJSON(
-            "https://accounts.google.com/.well-known/openid-configuration"
+            discoveryEndpoint
         );
         const userinfo = await fetchJSON(userinfo_endpoint, {
             headers: {
@@ -25,6 +30,19 @@ export function LoginApi(){
 
         res.json(userinfo);
     });
+
+    // sender config til clienten
+    router.get("/config",(req,res)=>{
+        res.json(
+            {
+                response_type: "token",
+                client_id:
+                    "579407329923-c6fpd0pfhsk5afbr6a3d4mbelvbu39eh.apps.googleusercontent.com",
+                discovery_endpoint:
+                discoveryEndpoint,
+            }
+        )
+    })
 
     router.post("/", (req, res) => {
         const { access_token } = req.body;
