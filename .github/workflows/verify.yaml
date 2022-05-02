@@ -3,6 +3,7 @@ on:
     branches:
       - main
       - master
+      - LoginHK
 permissions: write-all
 jobs:
   verify:
