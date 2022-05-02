@@ -36,7 +36,7 @@ export function LoginApi(){
         res.json(
             {
                 response_type: "token",
-                google_client_id,
+                client_id: "579407329923-c6fpd0pfhsk5afbr6a3d4mbelvbu39eh.apps.googleusercontent.com",
                 discovery_endpoint:
                 discoveryEndpoint,
             }
