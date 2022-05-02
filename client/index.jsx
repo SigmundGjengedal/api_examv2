@@ -7,6 +7,7 @@ import {AddMovie} from "./Pages/AddMovie";
 import {fetchJSON} from "./http";
 import {useLoading} from "./customHooks/useLoading";
 
+
 function FrontPage() {
     return (
         <div>
