@@ -85,6 +85,7 @@ export function LoginApi() {
     // cookies:
     router.delete("/", (req, res) => {
         res.clearCookie("google_access_token");
+        res.clearCookie("hk_access_token");
         // legge på provider eller bare begge?
         res.sendStatus(200);
     });

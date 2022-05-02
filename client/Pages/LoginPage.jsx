@@ -29,11 +29,13 @@ export function LoginCallback({ reload, config }) {
         if (code) {
             const { client_id, token_endpoint } = config[provider];
             const code_verifier = window.sessionStorage.getItem("code_verifier");
+            const redirect_uri = `${window.location.origin}/login/${provider}/callback`;
             const payload = {
                 grant_type: "authorization_code",
                 code,
                 client_id,
                 code_verifier,
+                redirect_uri,
             };
             const res = await fetch(token_endpoint, {
                 method: "POST",
@@ -85,6 +87,7 @@ export function LoginCallback({ reload, config }) {
 
 function LoginButton({ config, label, provider }) {
     async function handleLogin() {
+
         const {
             authorization_endpoint,
             response_type,
@@ -105,11 +108,12 @@ function LoginButton({ config, label, provider }) {
             redirect_uri: `${window.location.origin}/login/${provider}/callback`,
         };
 
+        // må bygge på params for active directory
         if (code_challenge_method) {
             const code_verifier = randomString(50);
-            window.sessionStorage.setItem("code_verifier", code_verifier);
-            parameters.code_challenge_method = code_challenge_method;
             parameters.code_challenge = await sha256(code_verifier);
+            parameters.code_challenge_method = code_challenge_method;
+            window.sessionStorage.setItem("code_verifier", code_verifier);
             parameters.domain_hint = "egms.no";
         }
 
