@@ -1,69 +1,16 @@
-import React, {useContext, useEffect} from "react";
+import React, {useContext} from "react";
 import ReactDOM from "react-dom"
-import {BrowserRouter, Link, Route, Routes, useNavigate} from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {DBFrontPage} from "./Pages/DBFrontPage";
 import {ListData} from "./Pages/ListData";
 import {AddMovie} from "./Pages/AddMovie";
-import {fetchJSON} from "./http";
 import {useLoading} from "./customHooks/useLoading";
 import {LoginPage} from "./Pages/LoginPage";
 import {MovieApiContext} from "./util/movieApiContext";
+import {Profile} from "./Pages/profile";
+import {FrontPage} from "./Pages/frontPage";
+import "./index.css"
 
-
-function FrontPage() {
-    return (
-        <div>
-            <h1>Front Page</h1>
-            <div>
-                <Link to={"/movies"}>List movies</Link>
-            </div>
-
-            <div>
-                <Link to="/login">Login</Link>
-            </div>
-
-        </div>
-    );
-}
-
-
-
-function Profile() {
-    const {loading, data, error} = useLoading(async () => {
-        return await fetchJSON("/api/login");
-    });
-    console.log(data)
-
-    if (loading) {
-        return <div>Please wait...</div>;
-    }
-    if (error) {
-        return <div>Error! {error.toString()}</div>;
-    }
-    return (
-        <div>
-            <h1>User Profile</h1>
-            <div>
-                {data.user.google && (
-                    <div>
-                        <h2>Profile for {data.user.google.name}({data.email})</h2>
-                        <img src={data.user.google.picture} alt={"Profile picture"}/>
-                    </div>
-                )}
-                {data.user.hk && (
-                    <div>
-                        <h2>Profile for {data.user.hk.name}({data.email})</h2>
-                        <img src={data.user.hk.picture} alt={"No Profile picture"}/>
-                    </div>
-                )}
-
-            </div>
-            <div>
-
-            </div>
-        </div>
-    );
-}
 
 export function Application() {
 

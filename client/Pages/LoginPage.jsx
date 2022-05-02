@@ -74,17 +74,6 @@ export function LoginCallback({ reload, config }) {
     return <h1>Please wait...</h1>;
 }
 
-/*export function EndSession({ reload }) {
-    const navigate = useNavigate();
-    const { endSession } = useContext(MovieApiContext);
-    useEffect(async () => {
-        await endSession();
-        reload();
-        navigate("/");
-    });
-    return <h1>Please wait...</h1>;
-}*/
-
 function LoginButton({ config, label, provider }) {
     async function handleLogin() {
 

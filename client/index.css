@@ -1,0 +1,9 @@
+.flex-container {
+    display: flex;
+}
+
+.column {
+    flex-direction: column;
+    margin: 20px;
+    font-size: 25px;
+}
