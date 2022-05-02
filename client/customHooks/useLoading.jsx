@@ -21,5 +21,5 @@ export function useLoading(loadingFunction, deps =[]) {
         load();
     }, deps);
 
-    return {loading, error, data};
+    return {loading, error, data,reload: load };
 }
