@@ -14,7 +14,7 @@ export function LoginApi(){
 
     // variables som gjenbrukes
     const discoveryEndpoint = "https://accounts.google.com/.well-known/openid-configuration";
-    const google_client_id = process.env.GOOGLE_CLIENT_ID
+    const client_id = process.env.GOOGLE_CLIENT_ID
     // henter userinnfo fra discovery endpointet
     router.get("/", async (req, res) => {
         const { access_token } = req.signedCookies;
@@ -36,7 +36,7 @@ export function LoginApi(){
         res.json(
             {
                 response_type: "token",
-                client_id: "579407329923-c6fpd0pfhsk5afbr6a3d4mbelvbu39eh.apps.googleusercontent.com",
+                client_id,
                 discovery_endpoint:
                 discoveryEndpoint,
             }
