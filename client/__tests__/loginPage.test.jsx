@@ -65,13 +65,14 @@ describe("LoginPage", () => {
         expect(registerLogin).toBeCalledWith("google", { access_token });
     });
 
-   /* it("redirect to log in with Høyskolen Kristiania", async () => {
+/*    it("redirect to log in with Høyskolen Kristiania", async () => {
         // replace window.location to be able to detect redirects
         const location = new URL("https://www.example.com");
         delete window.location;
         window.location = new URL(location);
 
-        const authorization_endpoint = `https://foo.example.com/auth`;
+        const authorization_endpoint = "https://login.microsoftonline.com/organizations/oauth2/v2.0/token";
+        const token_endpoint = "https://foo.example.com/abc"
         const client_id = `85fd18d0-24c9-4c83-98aa-edb6d4085113`;
         const code_challenge_method = "s256"
         const domElement = document.createElement("div");
@@ -79,7 +80,7 @@ describe("LoginPage", () => {
             <MemoryRouter>
                 <LoginPage
                     config={{
-                        hk: { authorization_endpoint, client_id,code_challenge_method },
+                        hk: { authorization_endpoint, client_id,code_challenge_method},
                     }}
                 />
             </MemoryRouter>,
