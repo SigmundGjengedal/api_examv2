@@ -76,7 +76,6 @@ export function LoginCallback({ reload, config }) {
 
 function LoginButton({ config, label, provider }) {
     async function handleLogin() {
-
         const {
             authorization_endpoint,
             response_type,

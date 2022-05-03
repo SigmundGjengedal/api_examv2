@@ -5,14 +5,15 @@ import {MoviesApi} from "../MoviesApi";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
 
-dotenv.config();
-
 const app = express();
 app.use(bodyParser.json());
-const mongoClient = new MongoClient(process.env.MONGODB_URL);
+let mongoClient;
 // klasse som tester movieApi. Får vi hentet data? Får vi posta data?
 // bruker dummy database.
+
 beforeAll(async () => {
+    dotenv.config();
+    mongoClient = new MongoClient(process.env.MONGODB_URL);
     await mongoClient.connect(); //Connecter på clienten
     const database = mongoClient.db("test_database"); //Angir hvilken DB den jobber med
     await database.collection("movies").deleteMany({}); //deleting all movies fra test database
@@ -22,21 +23,31 @@ afterAll(() => {
     mongoClient.close(); //Stenger connection etter at testene er kjørt
 });
 
+// tester
 describe("movieApi", () => {
-    it("adds a new movie", async () => {
+
+    it("adds a new movie, and filters movies by country", async () => {
+        let title = "Test 2 " + new Date();
+        const country = "random";
         await request(app)
             .post("/api/movies/new")
             .send({
-                title: "My Test Movie",
-                country: "Norway",
+                title,
+                country,
                 year1: 2020,
             })
             .expect(204);
+
         expect(
-            (await request(app).get("/api/movies").expect(200)).body.map(
+            (await request(app).get("/api/movies?country=random")).body.map(
                 ({ title }) => title
             )
-        ).toContain("My Test Movie");
+        ).toContain(title);
+        expect(
+            (await request(app).get("/api/movies?country=USA")).body.map(
+                ({ title }) => title
+            )
+        ).not.toContain(title);
     });
 
 });
