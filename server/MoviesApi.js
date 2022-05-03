@@ -5,13 +5,13 @@ export function MoviesApi(mongoDatabase) {
 
     router.get("/", async (req, res) => {
 
-       // lageren query som kan  bygges på, med f.eks søkeord.
+       // lager query som kan  bygges på, med f.eks søkeord.
         const query = {
            /* year: { $gte: 2000 },*/
         };
         const { country } = req.query; // tar imot query fra searchbar
         if (country) {
-            query.countries = { $in: [country] };
+           query.countries = { $in: [country] };
         }
         const movies = await mongoDatabase.collection("exam")
             .find(query)

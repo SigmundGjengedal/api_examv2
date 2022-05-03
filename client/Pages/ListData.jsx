@@ -4,16 +4,16 @@ import {ApplicationApiContext} from "../util/applicationApiContext";
 
 export function ListData() {
     const {listMovies} = useContext(ApplicationApiContext);
-    //state for searchbar
+    //state for searchbar. Første kan endres til det man trenger.
     const [country, setCountry] = useState("");
-    const [countryQuery, setCountryQuery] = useState("");
+    const [searchQuery, setSearchQuery] = useState("");
 
     const {loading, error, data} = useLoading(async () => listMovies({country})
         , [country]);
 
     function handleSubmitQuery(e) {
         e.preventDefault();
-        setCountry(countryQuery);
+        setCountry(searchQuery);
     }
 
     if (loading) {
@@ -33,13 +33,14 @@ export function ListData() {
             <h1>Movies in the DataBase</h1>
 
             <div>
+               {/* searchbar*/}
                 <form onSubmit={handleSubmitQuery}>
                     <label>
                         Country:
                         <input
                             id="country-query"
-                            value={countryQuery}
-                            onChange={(e) => setCountryQuery(e.target.value)}
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
                         />
                         <button>Filter</button>
                     </label>
