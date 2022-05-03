@@ -10,6 +10,7 @@ import {ApplicationApiContext} from "./util/applicationApiContext";
 import {Profile} from "./Pages/profile";
 import {FrontPage} from "./Pages/frontPage";
 import "./index.css"
+import {ChatPage} from "./Pages/chatPage";
 
 
 export function Application() {
@@ -36,6 +37,8 @@ export function Application() {
                 <Route path={"/db-front-page"} element={<DBFrontPage/>}/>
                 <Route path={"/movies"} element={<ListData/>}/>
                 <Route path={"/movies/new"} element={<AddData/>}/>
+
+                <Route path={"/chat"} element= {<ChatPage/>}/>
             </Routes>
         </BrowserRouter>
 

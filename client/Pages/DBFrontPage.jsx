@@ -21,6 +21,9 @@ export function DBFrontPage() {
                     <Link to="/profile">Your Profile</Link>
                 </div>
                 <div>
+                    <Link to="/chat">Chat</Link>
+                </div>
+                <div>
                     <button onClick={handleLogout}>Log out</button>
                 </div>
             </ul>

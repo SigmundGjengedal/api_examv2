@@ -1,0 +1,40 @@
+ body{
+    margin: 0;
+}
+.chat-page{
+    background-color: #f3f3f3;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: 50px;
+    box-sizing: border-box;
+}
+
+.chat-page header {
+    background-color: lightblue;
+    padding: .5em;
+}
+
+ .chat-page main{
+     background-color: #eee;
+     padding: .5em;
+ }
+
+.chat-page footer{
+    background-color: #0074D9;
+    padding: 2em;
+}
+ .chat-page footer form{
+     display: flex;
+     flex-direction: row;
+     align-items: stretch;
+ }
+ .chat-page footer input{
+     flex: 1;
+     font-size: 18px;
+ }
+
+ .chat-page footer button{
+     padding: 1em;
+     margin: 1em;
+ }
