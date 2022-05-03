@@ -1,5 +1,5 @@
 import {ListData} from "../Pages/ListData";
-import {MovieApiContext} from "../util/movieApiContext";
+import {ApplicationApiContext} from "../util/applicationApiContext";
 import React from "react";
 import ReactDOM from "react-dom";
 import {act, Simulate} from "react-dom/test-utils";
@@ -15,9 +15,9 @@ async function renderListMovies(listMovies) {
     const element = document.createElement("div");
     await act(async () =>
         ReactDOM.render(
-            <MovieApiContext.Provider value={{ listMovies }}>
+            <ApplicationApiContext.Provider value={{ listMovies }}>
                 <ListData />
-            </MovieApiContext.Provider>,
+            </ApplicationApiContext.Provider>,
             element
         )
     );
@@ -44,9 +44,9 @@ describe("ListData component", () => {
         const listMovies = jest.fn(() => []);
         await act(async () => {
             ReactDOM.render(
-                <MovieApiContext.Provider value={{ listMovies }}> // jest.fn
+                <ApplicationApiContext.Provider value={{ listMovies }}> // jest.fn
                     <ListData />
-                </MovieApiContext.Provider>,
+                </ApplicationApiContext.Provider>,
                 domElement
             );
         });

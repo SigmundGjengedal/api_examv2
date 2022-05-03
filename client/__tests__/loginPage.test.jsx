@@ -2,7 +2,7 @@ import { act, Simulate } from "react-dom/test-utils";
 import ReactDOM from "react-dom";
 import React from "react";
 import {LoginPage} from "../Pages/LoginPage";
-import {MovieApiContext} from "../util/movieApiContext";
+import {ApplicationApiContext} from "../util/applicationApiContext";
 import { MemoryRouter } from "react-router-dom";
 
 describe("LoginPage", () => {
@@ -55,9 +55,9 @@ describe("LoginPage", () => {
         act(() => {
             ReactDOM.render(
                 <MemoryRouter initialEntries={["/google/callback"]}>
-                    <MovieApiContext.Provider value={{registerLogin}}>
+                    <ApplicationApiContext.Provider value={{registerLogin}}>
                         <LoginPage reload={reload}/>
-                    </MovieApiContext.Provider>
+                    </ApplicationApiContext.Provider>
                 </MemoryRouter>,
                 domElement
             );

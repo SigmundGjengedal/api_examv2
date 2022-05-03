@@ -3,7 +3,7 @@ on:
     branches:
       - main
       - master
-      - tests
+      - RefactorGenerell
 permissions: write-all
 jobs:
   verify:

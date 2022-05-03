@@ -1,19 +1,19 @@
 import {useLoading} from "../customHooks/useLoading";
 import React, {useContext, useState} from "react";
-import {MovieApiContext} from "../util/movieApiContext";
+import {ApplicationApiContext} from "../util/applicationApiContext";
 
 export function ListData() {
-    const {listMovies} = useContext(MovieApiContext);
-    //state for searchbar
+    const {listMovies} = useContext(ApplicationApiContext);
+    //state for searchbar. Første kan endres til det man trenger.
     const [country, setCountry] = useState("");
-    const [countryQuery, setCountryQuery] = useState("");
+    const [searchQuery, setSearchQuery] = useState("");
 
     const {loading, error, data} = useLoading(async () => listMovies({country})
         , [country]);
 
     function handleSubmitQuery(e) {
         e.preventDefault();
-        setCountry(countryQuery);
+        setCountry(searchQuery);
     }
 
     if (loading) {
@@ -33,13 +33,14 @@ export function ListData() {
             <h1>Movies in the DataBase</h1>
 
             <div>
+               {/* searchbar*/}
                 <form onSubmit={handleSubmitQuery}>
                     <label>
                         Country:
                         <input
                             id="country-query"
-                            value={countryQuery}
-                            onChange={(e) => setCountryQuery(e.target.value)}
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
                         />
                         <button>Filter</button>
                     </label>
@@ -56,13 +57,15 @@ export function ListData() {
 function MovieCard({movie}) {
     return <div>
         <h3>Title: {movie.title}</h3>
-        <p>Year: {movie.year}</p>
+        <p>Year: {movie.parsedYear}</p>
         <p>Plot: {movie.plot}</p>
-        <p>Directors: {movie.directors}</p>
+        <p>Directors: {movie.director}</p>
+        <p>Country: {movie.countries}</p>
+{/*
         {
             movie.countries.map((c, index) => {
                 return (<p key={index}>Country: {c}</p>)
-            })}
+            })}*/}
         {movie.poster ? <img src={movie.poster} alt="pic" width={100}/> : null}
     </div>;
 }

@@ -1,8 +1,8 @@
-import {AddMovie} from "../Pages/AddMovie";
+import {AddData} from "../Pages/AddData";
 import React from "react";
 import ReactDOM from "react-dom";
 import {MemoryRouter} from "react-router-dom";
-import {MovieApiContext} from "../util/movieApiContext";
+import {ApplicationApiContext} from "../util/applicationApiContext";
 import {Simulate} from "react-dom/test-utils";
 
 // kun front-end testing. Er ikke knyttet til db
@@ -11,27 +11,27 @@ import {Simulate} from "react-dom/test-utils";
 describe("AddMovie component", () => {
     it("show form", () => {
         const element = document.createElement("div");
-        ReactDOM.render(<MemoryRouter><AddMovie/></MemoryRouter>, element);
+        ReactDOM.render(<MemoryRouter><AddData/></MemoryRouter>, element);
         expect(element.innerHTML).toMatchSnapshot();
         expect(
             Array.from(element.querySelectorAll("form label strong")).map(title => title.innerHTML)
         ).toEqual(["Title:", "Year:", "Country:","Plot:", "Director:"]);// rekkefølge FormInputLabel
 
     });
-    // tester submit med jest.fn og angir en title i eventData
+    // tester submit med jest.fn.
     it("adds movie on submit", () => {
         const createMovie = jest.fn();
         const title = "Test Movie";
-        const year1 = 2022;
+        const year = 2022;
         const director= "Sigmund";
         const country= "Norway";
         const plot = "Sigmund tester form label";
         const element = document.createElement("div");
         ReactDOM.render(
             <MemoryRouter>
-             <MovieApiContext.Provider value={{createMovie}}>
-                <AddMovie/>
-             </MovieApiContext.Provider>
+             <ApplicationApiContext.Provider value={{createMovie}}>
+                <AddData/>
+             </ApplicationApiContext.Provider>
             </MemoryRouter>,
             element
         );
@@ -39,7 +39,7 @@ describe("AddMovie component", () => {
             target: {value: title},
         });
         Simulate.change(element.querySelector(".form-input:nth-of-type(2) input"),{
-            target : { value : year1 },
+            target : { value : year },
         });
         Simulate.change(element.querySelector(".form-input:nth-of-type(3) input"),{
             target : { value : country },
@@ -53,11 +53,11 @@ describe("AddMovie component", () => {
 
         Simulate.submit(element.querySelector("form"));
         expect(createMovie).toBeCalledWith({
-            title: title,
-            year1: year1,
-            country: country,
-            plot: plot,
-            director: director,
+            title,
+            year,
+            country,
+            plot,
+            director,
         });
         // merk rekkefølge på disse fra AddMovie
 
