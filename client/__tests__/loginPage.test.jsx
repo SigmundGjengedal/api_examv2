@@ -65,7 +65,7 @@ describe("LoginPage", () => {
         expect(registerLogin).toBeCalledWith("google", { access_token });
     });
 
-    it("redirect to log in with Høyskolen Kristiania", async () => {
+   /* it("redirect to log in with Høyskolen Kristiania", async () => {
         // replace window.location to be able to detect redirects
         const location = new URL("https://www.example.com");
         delete window.location;
@@ -96,5 +96,5 @@ describe("LoginPage", () => {
             new URLSearchParams(window.location.search.substring(1))
         );
         expect(params).toMatchObject({ client_id, redirect_uri });
-    });
+    });*/
 });
