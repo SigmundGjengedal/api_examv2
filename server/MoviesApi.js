@@ -13,28 +13,28 @@ export function MoviesApi(mongoDatabase) {
         if (country) {
             query.countries = { $in: [country] };
         }
-        const movies = await mongoDatabase.collection("movies")
+        const movies = await mongoDatabase.collection("exam")
             .find(query)
             .sort({
                 year:-1 //Sort from high-low = -1
             })
-            .map(({title, year, plot, countries,  directors, poster, imdb})=>{  //velger info som retuneres fra db - bruker det hos clienten
-                return {title, year, plot, directors, poster, countries, imdb}
+            .map(({title, parsedYear, plot, countries,  director, poster, imdb})=>{  //velger info som retuneres fra db - bruker det hos clienten
+                return {title, parsedYear, plot, director, poster, countries, imdb}
             })
-            .limit(15) //limits results
+            .limit(100) //limits results
             .toArray();
 
         res.json(movies);
     });
 
     router.post("/new", (req, res) => {
-        const { title, plot, year1, country, director } = req.body;
-        const year = parseInt(year1)
-        const countries = [country]
-        const directors = [director]
+        const { title, plot, year, country, director } = req.body;
+        // converts before insert
+        const parsedYear = parseInt(year) // int insert
+        const countries = [country] // array convert insert. Dette er query param!
         mongoDatabase
-            .collection("movies")
-            .insertOne({ title, plot, year, countries,directors});
+            .collection("exam")
+            .insertOne({ title, plot, parsedYear, countries,director});
         res.sendStatus(204);
     });
 

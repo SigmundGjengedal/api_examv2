@@ -3,10 +3,10 @@ import ReactDOM from "react-dom"
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {DBFrontPage} from "./Pages/DBFrontPage";
 import {ListData} from "./Pages/ListData";
-import {AddMovie} from "./Pages/AddMovie";
+import {AddData} from "./Pages/AddData";
 import {useLoading} from "./customHooks/useLoading";
 import {LoginPage} from "./Pages/LoginPage";
-import {MovieApiContext} from "./util/movieApiContext";
+import {ApplicationApiContext} from "./util/applicationApiContext";
 import {Profile} from "./Pages/profile";
 import {FrontPage} from "./Pages/frontPage";
 import "./index.css"
@@ -14,7 +14,7 @@ import "./index.css"
 
 export function Application() {
 
-    const {fetchLogin} = useContext(MovieApiContext);
+    const {fetchLogin} = useContext(ApplicationApiContext);
     const {data, error, loading, reload} = useLoading(fetchLogin);
     if (loading) {
         return <div>Loading...</div>
@@ -35,7 +35,7 @@ export function Application() {
 
                 <Route path={"/db-front-page"} element={<DBFrontPage/>}/>
                 <Route path={"/movies"} element={<ListData/>}/>
-                <Route path={"/movies/new"} element={<AddMovie/>}/>
+                <Route path={"/movies/new"} element={<AddData/>}/>
             </Routes>
         </BrowserRouter>
 

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Route, Routes, useNavigate, useParams } from "react-router-dom";
-import {MovieApiContext} from "../util/movieApiContext";
+import {ApplicationApiContext} from "../util/applicationApiContext";
 import { randomString } from "../util/randomString";
 import { sha256 } from "../util/sha256";
 
@@ -8,7 +8,7 @@ export function LoginCallback({ reload, config }) {
     const { provider } = useParams();
     const [error, setError] = useState();
     const navigate = useNavigate();
-    const { registerLogin } = useContext(MovieApiContext);
+    const { registerLogin } = useContext(ApplicationApiContext);
     useEffect(async () => {
         const { access_token, error, error_description, state, code } =
             Object.fromEntries(
