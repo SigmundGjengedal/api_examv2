@@ -27,14 +27,19 @@ afterAll(() => {
 describe("movieApi", () => {
 
     it("adds a new movie, and filters movies by country", async () => {
-        let title = "Test 2 " + new Date();
+        const title = "Test 2 " + new Date();
         const country = "random";
+        const year = 2020
+        const plot = "dette er en film";
+        const director = "Tolkien"
         await request(app)
             .post("/api/movies/new")
             .send({
                 title,
                 country,
-                year1: 2020,
+                year,
+                plot,
+                director,
             })
             .expect(204);
 
