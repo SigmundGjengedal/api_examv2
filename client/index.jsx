@@ -32,7 +32,7 @@ export function Application() {
                     path={"/login/*"}
                     element={<LoginPage config={data.config} reload={reload}/>}
                 />
-                <Route path={"/profile"} element={<Profile/>}/>s
+                <Route path={"/profile"} element={<Profile/>}/>
 
                 <Route path={"/db-front-page"} element={<DBFrontPage/>}/>
                 <Route path={"/movies"} element={<ListData/>}/>
